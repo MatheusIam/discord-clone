@@ -84,3 +84,7 @@ If you wish to contribute to the project, please follow the standard GitHub Fork
 ## License
 
 This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute it according to the terms of the license.
+
+## Logical schema powered by Supabase
+
+![Logical schema image](https://prnt.sc/KxzgQ12X_cum)
