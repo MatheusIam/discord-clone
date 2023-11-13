@@ -18,7 +18,9 @@ model Perfil {
   email   String @db.Text
   fotoURL String @db.Text
 
-  servers Server[]
+  servers  Server[]
+  members  Member[]
+  channels Channel[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -31,10 +33,61 @@ model Server {
   fotoURL String @db.Text
 
   perfilId String
-  Perfil   Perfil @relation(fields: [perfilId], references: [id], onDelete: Cascade)
+  perfil   Perfil @relation(fields: [perfilId], references: [id], onDelete: Cascade)
+
+  members  Member[]
+  channels Channel[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([perfilId])
+}
+
+// Cargos
+enum MemberRole {
+  ADMIN
+  MODERATOR
+  GUEST
+}
+
+model Member {
+  id   String     @id @default(uuid())
+  role MemberRole @default(GUEST)
+
+  perfilId String
+  perfil   Perfil @relation(fields: [perfilId], references: [id], onDelete: Cascade)
+
+  serverId String
+  server   Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([perfilId])
+  @@index([serverId])
+}
+
+enum ChannelType {
+  TEXT
+  AUDIO
+  VIDEO
+}
+
+model Channel {
+  id          String      @id @default(uuid())
+  nome        String
+  channelType ChannelType @default(TEXT)
+
+  perfilId String
+  perfil   Perfil @relation(fields: [perfilId], references: [id], onDelete: Cascade)
+
+  serverId String
+  server   Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([perfilId])
+  @@index([serverId])
 }
