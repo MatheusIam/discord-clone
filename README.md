@@ -87,4 +87,4 @@ This project is licensed under the [MIT License](LICENSE). Feel free to use, mod
 
 ## Logical schema powered by Supabase
 
-![Logical schema image](https://prnt.sc/KxzgQ12X_cum)
+![Logical schema image](http://i.imgur.com/rRhXKji.png)
