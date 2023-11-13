@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Profile
+model Perfil {
+  id      String @id @default(uuid())
+  userId  String @unique
+  nome    String
+  email   String @db.Text
+  fotoURL String @db.Text
+
+  servers Server[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// server, tipo, discord server
+model Server {
+  id      String @id @default(uuid())
+  nome    String
+  fotoURL String @db.Text
+
+  perfilId String
+  Perfil   Perfil @relation(fields: [perfilId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([perfilId])
+}

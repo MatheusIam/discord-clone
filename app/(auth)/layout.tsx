@@ -5,7 +5,9 @@ interface LoginLayoutProps {
 }
 
 const LoginLayout: React.FC<LoginLayoutProps> = ({ children }) => {
-  return <div className="bg-indigo-500 h-full">{children}</div>;
+  return (
+    <div className="h-full flex items-center justify-center">{children}</div>
+  );
 };
 
 export default LoginLayout;
